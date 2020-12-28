@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt-nodejs')
 
 module.exports = app => {
     const signin = async (req, res) => {
-        if(!req.body.email || !req.body.password){
+        if (!req.body.email || !req.body.password) {
             return res.status(400).send('Informe usuário e senha!')
         }
 
@@ -30,7 +30,7 @@ module.exports = app => {
             email: user.email,
             admin: user.admin,
             iat: now,
-            exp: now + (60 * 60 * 24 * 3) //3 dias
+            exp: now + (60 * 60 * 24 * 1) //1 dia
         }
 
         res.json({
@@ -50,7 +50,7 @@ module.exports = app => {
             }
         }catch(e){
             //problema com o token - inválido ou expirado
-            res.send(false)
+           // res.send(false)
         }
         res.send(false)
     }

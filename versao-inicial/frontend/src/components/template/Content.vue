@@ -13,7 +13,8 @@ export default {
 <style>
     .content{
         grid-area: content;
-        background-color: #efefef;
+        background-color: oldlace;
         padding: 20px;
+        border-left: 1px solid #343242;
     }
 </style>

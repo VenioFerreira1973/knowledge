@@ -12,9 +12,12 @@ module.exports = app => {
         const user = { ...req.body }
         if(req.params.id) user.id = req.params.id
 
+        //Se a requisição não partiu da URL da API original /users o user.admin é setado para false
         if(!req.originalUrl.startsWith('/users')) user.admin = false
-        if(!req.originalUrl.startsWith('/signup')) user.admin = false
-        if(!req.user || !req.user.admin) user.admin = false 
+        //Se a requisição vier sem user ou o user da requisição não for admin o user.admin é setado para false
+        if(!req.user || !req.user.admin) user.admin = false
+        //Em todos os outros casos o user.admin recebe o valor que vier na requisição
+
 
         try {
             existsOrError(user.name, 'Nome não informado')
@@ -40,7 +43,7 @@ module.exports = app => {
             app.db('users')
                 .update(user)
                 .where({ id: user.id })
-                .whereNull('deletedAt')
+                .whereNull('deletedAt')//Só altera usuário que o deletedAt seja nulo
                 .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
         } else {
@@ -50,10 +53,11 @@ module.exports = app => {
                 .catch(err => res.status(500).send(err))
         }
     }
+
     const get = (req, res) => {
         app.db('users')
             .select('id', 'name', 'email', 'admin')
-            .whereNull('deletedAt')
+            .whereNull('deletedAt')//Só retorna os usuários que o campo deletedAt é nulo, ou seja, ainda não foi deletado
             .then(users => res.json(users))
             .catch(err => res.status(500).send(err))
     }
@@ -62,7 +66,8 @@ module.exports = app => {
         app.db('users')
             .select('id', 'name', 'email', 'admin')
             .where({ id: req.params.id }).first()
-            .whereNull('deletedAt')
+            .whereNull('deletedAt')//Só retorna os usuários que o campo deletedAt é nulo, ou seja, ainda não foi deletado
+            .first()
             .then(user => res.json(user))
             .catch(err => res.status(500).send(err))
     }

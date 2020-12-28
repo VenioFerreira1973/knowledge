@@ -1,6 +1,9 @@
 <template>
     <footer class="footer">
-        <span>Copyright <strong>Cod3r</strong> ₢ 2015-2020</span>    
+        <span>Copyright <strong>Venio</strong> ₢ 2015-2020</span>    
+        <hr>
+        <span class="tokenized">Token de acesso limitado por tempo!</span>
+    
     </footer>    
 </template>
 
@@ -14,7 +17,7 @@ export default {
     .footer{
         grid-area: footer;
         background-color: #ddd;
-        color: #333;
+        color: blue;
 
         display: flex;
         align-items: center;
@@ -22,4 +25,10 @@ export default {
         padding-right: 10px;
         
     }
+
+    .footer .tokenized{
+        font-size: 0.8rem;
+        color: blue;
+    }   
+
 </style>

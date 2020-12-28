@@ -6,7 +6,7 @@
             <b-card no-body>
                 <b-tabs card> 
                     <b-tab title="Artigos" active>
-                       <ArticleAdmin />
+                        <ArticleAdmin />
                     </b-tab>
                     <b-tab title="Categorias">
                         <CategoryAdmin />
